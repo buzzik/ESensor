@@ -3,7 +3,7 @@
 
 class ESensor {
    public:
-    ESensor(byte pin = 0, String _sensorName = "sensor", MQTTClient* mqttObj = 0);
+    ESensor(byte pin = 0, String _sensorName = "sensor", MQTTClient* mqttObj = 0, bool isPulledUp = false);
     void init(byte pin, String _sensorName);
     int get(); // получить, сохранить и вернуть текущий статус датчика
     int isSwitched(); // Проверка на изменения состояния, вернет true если состояние датчика изменилось
@@ -14,4 +14,6 @@ class ESensor {
    private:
     byte _pin;
     MQTTClient *_mqttObj;  // вспомогательная ссылка для приема объекта mqtt
+    bool _isPulledUp;
+    
 };

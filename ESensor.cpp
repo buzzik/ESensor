@@ -3,11 +3,19 @@
 #include <Arduino.h>
 #include <MQTTClient.h>
 
-ESensor::ESensor(byte pin, String _sensorName, MQTTClient *mqttObj) {
+ESensor::ESensor(byte pin, String _sensorName, MQTTClient *mqttObj, bool isPulledUp) {
     _pin = pin;
     sensorName = _sensorName;
     _mqttObj = mqttObj;
-    pinMode(_pin, INPUT);
+    _isPulledUp = isPulledUp;
+    if (isPulledUp)
+    {
+        pinMode(_pin, INPUT_PULLUP);
+    } else {
+        pinMode(_pin, INPUT);
+    }
+    
+    
     
 }
 

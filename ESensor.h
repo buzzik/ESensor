@@ -9,6 +9,7 @@ class ESensor {
     int isSwitched(); // Проверка на изменения состояния, вернет true если состояние датчика изменилось
     int isTriggered(); // Проверка на включение датчика (например для выключателей) вернет true если датчик был включен
     int pVal, val;
+    long onTime, offTime;
     String sensorName;
 
    private:

@@ -8,6 +8,8 @@ ESensor::ESensor(byte pin, String _sensorName, MQTTClient *mqttObj, bool isPulle
     sensorName = _sensorName;
     _mqttObj = mqttObj;
     _isPulledUp = isPulledUp;
+    onTime = 0;
+    offTime = 0;
     if (isPulledUp)
     {
         pinMode(_pin, INPUT_PULLUP);
@@ -30,6 +32,15 @@ int ESensor::isSwitched() {
     get();
     if (pVal != val) {
         _mqttObj->publish("/" + sensorName + "/state", (String)val);
+        if (val == HIGH)
+        {
+            onTime = millis();
+        } else
+        {
+            offTime = millis();
+        }
+        
+        
         return true;
     } else {
         return false;
